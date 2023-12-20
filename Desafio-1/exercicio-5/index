@@ -1,0 +1,25 @@
+function encontrarNumeroUnico(arr) {
+    const ocorrencias = {};
+
+    arr.forEach((numero, index) => {
+        if (!ocorrencias.hasOwnProperty(numero)) {
+            ocorrencias[numero] = { count: 0, index };
+        }
+        ocorrencias[numero].count += 1;
+    });
+
+    const arrayOutput = arr.map(numero => `[${ocorrencias[numero].index}] => ${numero}`).join(',\n');
+    const numeroUnico = Object.keys(ocorrencias).find(numero => ocorrencias[numero].count !== 3);
+
+    return {
+        arrayOriginal: arr,
+        arrayOutput: `[${arrayOutput}]`,
+        singleNumber: Number(numeroUnico),
+    };
+}
+
+const entrada = [5, 3, 4, 3, 5, 5, 3];
+const saida = encontrarNumeroUnico(entrada);
+console.log("Input:", saida.arrayOriginal);
+console.log("Output:", saida.arrayOutput);
+console.log("Single Number:", saida.singleNumber);

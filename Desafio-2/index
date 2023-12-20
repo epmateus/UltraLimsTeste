@@ -1,0 +1,57 @@
+async function consultarCEP() {
+    const cepInput = document.getElementById("cepInput").value;
+    
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cepInput}/json/`);
+      const data = await response.json();
+  
+      if (!data.erro) {
+        armazenarRegistro(data);
+        atualizarListaRegistros();
+      } else {
+        alert("CEP não encontrado");
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  }
+  
+  function armazenarRegistro(registro) {
+    const registrosArmazenados = JSON.parse(localStorage.getItem("registros")) || [];
+    registrosArmazenados.push(registro);
+    localStorage.setItem("registros", JSON.stringify(registrosArmazenados));
+  }
+  
+  function ordenarRegistros(campo, ordem) {
+    const registrosArmazenados = JSON.parse(localStorage.getItem("registros")) || [];
+  
+    registrosArmazenados.sort((a, b) => {
+      const valorA = (a[campo] || '').toUpperCase();
+      const valorB = (b[campo] || '').toUpperCase();
+  
+      return ordem === "Asc" ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
+    });
+  
+    localStorage.setItem("registros", JSON.stringify(registrosArmazenados));
+  }
+  
+  
+  function atualizarListaRegistros() {
+    const registrosArmazenados = JSON.parse(localStorage.getItem("registros")) || [];
+    const ordenacao = document.getElementById("ordenacao").value;
+  
+    if (ordenacao) {
+      const [campo, ordem] = ordenacao.toLowerCase().split(" ");
+      ordenarRegistros(campo, ordem);
+    }
+  
+    const listaRegistros = document.getElementById("registros");
+    listaRegistros.innerHTML = "";
+  
+    registrosArmazenados.forEach(registro => {
+      const itemLista = document.createElement("li");
+      itemLista.textContent = `Cidade: ${registro.localidade}, Bairro: ${registro.bairro}, Estado: ${registro.uf}`;
+      listaRegistros.appendChild(itemLista);
+    });
+  }
+  

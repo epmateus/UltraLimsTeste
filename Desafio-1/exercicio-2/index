@@ -1,0 +1,10 @@
+function encontrarSomaZero(arr) {
+    return arr
+        .map((_, i) => arr.slice(i, i + 3))
+        .filter(tripleta => tripleta.reduce((soma, num) => soma + num, 0) === 0);
+}
+
+const entrada = [-1, 0, 1, 2, -1, -4];
+const saida = encontrarSomaZero(entrada);
+console.log("Input:", entrada);
+console.log("Output:", saida);

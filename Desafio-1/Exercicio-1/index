@@ -1,0 +1,15 @@
+function encontrarFaltantes(arr) {
+  const minValor = Math.min(...arr);
+  const maxValor = Math.max(...arr);
+  const conjuntoArray = new Set(arr);
+
+  const faltantes = Array.from({ length: maxValor - minValor }, (_, index) => index + minValor)
+    .filter(numero => !conjuntoArray.has(numero));
+
+  return faltantes;
+}
+
+const entrada = [1, 2, 3, 6, 7, 8];
+const saida = encontrarFaltantes(entrada);
+console.log("Input:", entrada);
+console.log("Output:", saida);

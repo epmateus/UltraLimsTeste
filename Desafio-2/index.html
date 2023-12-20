@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta CEP</title>
+
+</head>
+
+<body>
+    <h1>Consulta de CEP</h1>
+    <label for="cepInput">CEP:</label>
+    <input type="text" id="cepInput" placeholder="Digite o CEP">
+    <button onclick="consultarCEP()">Consultar</button>
+
+    <h2>Registros Armazenados</h2>
+    <select id="ordenacao">
+        <option value="cidadeAsc">Cidade (Crescente)</option>
+        <option value="cidadeDesc">Cidade (Decrescente)</option>
+        <option value="bairroAsc">Bairro (Crescente)</option>
+        <option value="bairroDesc">Bairro (Decrescente)</option>
+        <option value="estadoAsc">Estado (Crescente)</option>
+        <option value="estadoDesc">Estado (Decrescente)</option>
+    </select>
+
+    <ul id="registros"></ul>
+
+    <script src="./index.js"></script>
+</body>
+</html>

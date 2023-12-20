@@ -1,0 +1,8 @@
+function encontrarSomaDesejada(arr, somaDesejada) {
+    return arr.map((_, i) => arr.slice(i, i + 3)).filter(tripleta => tripleta.reduce((soma, num) => soma + num, 0) === somaDesejada);
+}
+
+const entrada = [[2, 7, 7, 1, 8, 2, 7, 8, 7], 16];
+const saida = encontrarSomaDesejada(entrada[0], entrada[1]);
+console.log("Input:", entrada);
+console.log("Output:", saida);
